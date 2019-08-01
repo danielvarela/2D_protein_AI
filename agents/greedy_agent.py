@@ -9,7 +9,7 @@ class GreedyAgent():
     def __init__(self):
         self.e = EnergySampler() 
     def choose_action(self, env, res_pos):
-        rewards = self.e.get_current_observation(env, res_pos)
+        rewards = self.e.get_current_observation(env, env.actions, res_pos)
         #if (np.random.randint(0,10) < 3) :
         next_rewards = rewards[:len(rewards)//2]
         min_rewards = [i for i,x in enumerate(next_rewards) if x == min(next_rewards)]
@@ -21,7 +21,7 @@ class GreedyAgentSimple():
     def __init__(self):
         self.e = EnergySampler() 
     def choose_action(self, env, res_pos):
-        rewards = self.e.get_current_observation(env, res_pos)
+        rewards = self.e.get_current_observation(env, env.actions, res_pos)
         #if (np.random.randint(0,10) < 3) :
         min_rewards = [i for i,x in enumerate(rewards) if x == min(rewards)]
         choice = min_rewards[np.random.randint(0, len(min_rewards))]

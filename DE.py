@@ -5,74 +5,10 @@ from gym import spaces
 import numpy as np
 from threading import Thread
 from visual_utils.bokeh_visualizer import Visualizer
-from agents.energy_sampler import EnergySampler
-from agents.greedy_agent import NNAgent
-from agents.greedy_agent import NNGridAgent
-from agents.keras_nn import FFmodel
-from agents.NeuralNetworkOperator import ExtensiveLatticeNeuralNetworkOperator
-from agents.NeuralNetworkOperator import NeuralNetworkOperator
-from agents.NeuralNetworkOperator import NeuralNetworkGridOperator
-from agents.NeuralNetworkOperator import NNOperatorBuilder
-from PSP.PSPencoder import PSPencoder
+from cost_funcs.psp_func import PSPFunction
+from cost_funcs.nn_folding_func import NeuralNetworkFunction 
 
-#--- FUNCTIONS ----------------------------------------------------------------+
-class CostFunction():
-    def __init__(self):
-       self.name = "parabola"
-    def run(self, x ):
-        return sum([x[i]**2 for i in range(len(x))])       
-    def size(self):
-        return 2
 
-class PSPFunction(CostFunction):
-    def __init__(self, seq):
-        self.name = "PSP function"
-        self.seq = seq
-        self.encoder = PSPencoder(self.seq)
-        
-    def size(self):
-        return self.encoder.ind_size()
-    
-    def run(self, x):
-        reward = 0
-        reward = self.encoder.run(x)
-        return reward
-
-    def render(self, x):
-        self.encoder.render(x)
-        
- 
-class NeuralNetworkFunction(CostFunction):
-    def __init__(self, seq, strategy = "nn_operator"):
-        self.name = "NN function"
-        self.strategy = strategy
-        self.seq = seq
-        if (self.strategy is "grid"):
-            self.model = FFmodel(100)
-        if (self.strategy is "nn_operator"):
-            self.model = FFmodel(8)
-        if (self.strategy is "nn_operator_ext"):
-            self.model = FFmodel(4)
-
-        self.operator = NNOperatorBuilder(self.seq).get(self.strategy)
-            
-    def size(self):
-        return self.model.nn_connections()
-    
-    def run(self, x):
-        #print("run " + str(len(x)) )
-        self.model.set_weights(x)
-        # run model from 1 to len(self.seq)
-        # reward is energy value of the folded protein
-        reward = 0
-        reward = self.operator.run(self.model)
-        return reward
-
-    def render(self, x):
-        self.model.set_weights(x)
-        self.operator.render(self.model)
-        
-    
 def ensure_bounds(vec, bounds):
 
     vec_new = []
@@ -102,11 +38,12 @@ class Individual():
 #--- MAIN ---------------------------------------------------------------------+
 
 class DifferentialEvolutionAlgorithm():
-    def __init__(self, seq, popsize, mutate, recombination, maxiter, strategy =
+    def __init__(self, seq, cost_func, popsize, mutate, recombination, maxiter, strategy =
                  "nn_operator" , visualizer=None):
         #func = NeuralNetworkFunction(seq)
         #cost_func = func                   # Cost function
         self.seq = seq
+        self.cost_func = cost_func
         #self.cost_func = cost_func
         self.popsize = popsize
         self.mutate = mutate
@@ -117,8 +54,6 @@ class DifferentialEvolutionAlgorithm():
         
     def main(self):
         #--- INITIALIZE A POPULATION (step #1) ----------------+
-
-        self.cost_func = NeuralNetworkFunction(self.seq, self.strategy)
         #self.cost_func = PSPFunction(self.seq)
         ind_size = self.cost_func.size()
         self.bounds = [(-1,1)] * ind_size            # Bounds [(x1_min, x1_max), (x2_min, x2_max),...]
@@ -197,8 +132,14 @@ class DifferentialEvolutionAlgorithm():
 
         return gen_sol
 
-#--- CONSTANTS ----------------------------------------------------------------+
+#--- MAIN  ----------------------------------------------------------------+
 
+def build_cost_func(mode, seq, strategy):
+    if (mode is "PSP"):
+        return PSPFunction(seq)
+    if (mode is "nn_folding"):
+        return NeuralNetworkFunction(seq, strategy)
+    
 def main():
     #seq = 'HHHHHPHHHHHHPHHHHPHH' # Our input sequence
     #seq = 'HPHPPHHPHPPHPHHPPHPH' # Our input sequence
@@ -206,20 +147,22 @@ def main():
     #func = CostFunction()
     #ind_size = func.size()
     #print(ind_size)
-    #bounds = [(-1,1)] * ind_size            # Bounds [(x1_min, x1_max), (x2_min, x2_max),...]
-    #popsize = len(seq) * 15                        # Population size, must be >= 4
-    popsize = 100                        # Population size, must be >= 4
-    mutate = 0.3                        # Mutation factor [0,2]
-    recombination = 0.9
-    # Recombination rate [0,1]
+    #bounds = [(-1,1)] * ind_size           # Bounds [(x1_min, x1_max), (x2_min, x2_max),...]
+    #popsize = len(seq) * 15            # Population size, must be >= 4
+    popsize = 100                   # Population size, must be >= 4
+    mutate = 0.3                  # Mutation factor [0,2]
+    recombination = 0.9          # Recombination rate [0,1]
     maxiter = 5000                        # Max number of generations (maxiter)
-    #--- RUN ----------------------------------------------------------------------+
+
     #visualizer = Visualizer(0 ,0)
     visualizer = None
     strategy  = "nn_operator_ext"
-    alg = DifferentialEvolutionAlgorithm(seq, popsize, mutate, recombination,
+    mode = "PSP"
+    cost_func = build_cost_func(mode, seq, strategy)
+
+    #--- RUN ----------------------------------------------------------------------+
+    alg = DifferentialEvolutionAlgorithm(seq, cost_func, popsize, mutate, recombination,
                                          maxiter, strategy, visualizer)
-    #main(cost_func, bounds, popsize, mutate, recombination, maxiter)
     alg.main()
     #thread = Thread(target=alg.main)
     #thread.start()
