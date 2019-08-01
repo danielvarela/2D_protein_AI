@@ -1,7 +1,7 @@
 # Artificial intelligence methods applied to protein folding with 2D lattice
 
 My PhD research project focuses on the computational modeling of the protein folding process. The goal is to obtain  
-the three-dimensional structure of the protein only with the amino acid  sequence information (*ab initio*) by using evolutionary computing, artificial life techniques and complex systems theory methods. Since the structure defines the function of a protein, this would allow a computational drug design. More information about the protein structure prediction problem can be found at [Wikipedia](https://en.wikipedia.org/wiki/Protein_structure_prediction). To know more about my research can be found at my publications or, in case of more detailed information, please, feel free to contact me.
+the three-dimensional structure of the protein only with the amino acid  sequence information (*ab initio*) by using evolutionary computing, artificial life techniques and complex systems theory methods. Since the structure defines the function of a protein, this would allow a computational drug design. More information about the protein structure prediction problem can be found at [Wikipedia](https://en.wikipedia.org/wiki/Protein_structure_prediction). More information about my research can be found at my publications or, in case of more detailed information, please, feel free to contact me.
 
 This project is a python implementation of the same methods using in my PhD thesis but with a simple 2D lattice and known python libraries.
 
@@ -68,8 +68,12 @@ Each connection between two amino acids can perform four possible moves in a 2D 
 
 Each individual is encoded as an 1D array of length `n * {L, D, U, R}`, where n is the total number of connections between the amino acid sequence. By this way, we encode each sequence move as the minimum of its four possible moves.
 
+![img](https://github.com/danielvarela/2D_protein_AI/blob/master/images/individual_encoding.png)
+
 ### Fitness
 
 This implementation uses the one of the most studied lattice models, the HP model [Dill90]. Proteins that have minimum energy are assumed to be in their native state. Two amino acids are in contact if they are non-consecutive neighbors on the protein sequence and are neighbors (or in contact) on the lattice. In case that the two amino acids are hydrohopic (H), we count the contact.
+
+![equation](https://latex.codecogs.com/gif.latex?E&space;=&space;\sum_{i&space;<&space;j&space;&space;1}&space;c_{ij}&space;\cdot&space;e_{ij})
 
 
