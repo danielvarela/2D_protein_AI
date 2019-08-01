@@ -6,8 +6,8 @@ from agents.energy_sampler import EnergySamplerSimple
 from agents.greedy_agent import NNAgent
 from agents.greedy_agent import NNAgentSimple
 from agents.greedy_agent import NNGridAgent
-from Lattice2D import Lattice2D
-from keras_nn import FFmodel
+from lattices.Lattice2D import Lattice2D
+from agents.keras_nn import FFmodel
 
 
 class NeuralNetworkOperator():

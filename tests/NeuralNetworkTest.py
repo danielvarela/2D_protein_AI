@@ -1,24 +1,22 @@
 import random
-
 import numpy as np
-
 from threading import Thread
-from bokeh_visualizer import Visualizer
+from visual_utils.bokeh_visualizer import Visualizer
 import gym
 from gym import spaces
 from agents.energy_sampler import EnergySampler
 from agents.greedy_agent import NNAgent
 from agents.greedy_agent import NNGridAgent
-from keras_nn import FFmodel
-from NeuralNetworkOperator import ExtensiveLatticeNeuralNetworkOperator
-from NeuralNetworkOperator import NeuralNetworkOperator
-from Lattice2D import Lattice2D
+from agents.keras_nn import FFmodel
+from agents.NeuralNetworkOperator import ExtensiveLatticeNeuralNetworkOperator
+from agents.NeuralNetworkOperator import NeuralNetworkOperator
+from lattices.Lattice2D import Lattice2D
 
 class NeuralNetworkOperatorTest():
     def __init__(self):
         self.seq = "HPPHPPH"
         self.model = FFmodel(8)
-        self.operator = NeuralNetworkOperator(self.seq)
+        self.operator = NNOperatorBuilder(self.seq).get("nn_operator")
         self.env = Lattice2D(self.seq)
         
     def check_env(self):

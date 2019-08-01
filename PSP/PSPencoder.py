@@ -1,6 +1,6 @@
 import random
 import numpy as np
-from Lattice2D import Lattice2D
+from lattices.Lattice2D import Lattice2D
 
 class PSPencoder():
     def __init__(self, seq):

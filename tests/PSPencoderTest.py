@@ -1,7 +1,7 @@
 import random
 import numpy as np
 from threading import Thread
-from bokeh_visualizer import Visualizer
+from visual_utils.bokeh_visualizer import Visualizer
 import gym
 
 from gym import spaces
@@ -9,11 +9,11 @@ from agents.energy_sampler import EnergySampler
 from agents.greedy_agent import NNAgent
 from agents.greedy_agent import NNGridAgent
 from gym_lattice.envs import Lattice2DEnv
-from keras_nn import FFmodel
-from NeuralNetworkOperator import ExtensiveLatticeNeuralNetworkOperator
-from NeuralNetworkOperator import NeuralNetworkOperator
-from Lattice2D import Lattice2D
-from PSPencoder import PSPencoder
+from agents.keras_nn import FFmodel
+from agents.NeuralNetworkOperator import ExtensiveLatticeNeuralNetworkOperator
+from agents.NeuralNetworkOperator import NeuralNetworkOperator
+from lattices.Lattice2D import Lattice2D
+from PSP.PSPencoder import PSPencoder
 
 class PSPencoderTest():
     def init_encoder(self):

@@ -1,20 +1,19 @@
 import random
 
-import numpy as np
-
-from threading import Thread
-from bokeh_visualizer import Visualizer
 import gym
 from gym import spaces
+import numpy as np
+from threading import Thread
+from visual_utils.bokeh_visualizer import Visualizer
 from agents.energy_sampler import EnergySampler
 from agents.greedy_agent import NNAgent
 from agents.greedy_agent import NNGridAgent
-from keras_nn import FFmodel
-from NeuralNetworkOperator import ExtensiveLatticeNeuralNetworkOperator
-from NeuralNetworkOperator import NeuralNetworkOperator
-from NeuralNetworkOperator import NeuralNetworkGridOperator
-from NeuralNetworkOperator import NNOperatorBuilder
-from PSPencoder import PSPencoder
+from agents.keras_nn import FFmodel
+from agents.NeuralNetworkOperator import ExtensiveLatticeNeuralNetworkOperator
+from agents.NeuralNetworkOperator import NeuralNetworkOperator
+from agents.NeuralNetworkOperator import NeuralNetworkGridOperator
+from agents.NeuralNetworkOperator import NNOperatorBuilder
+from PSP.PSPencoder import PSPencoder
 
 #--- FUNCTIONS ----------------------------------------------------------------+
 class CostFunction():
