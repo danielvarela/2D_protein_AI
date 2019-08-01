@@ -5,6 +5,51 @@ the three-dimensional structure of the protein only with the amino acid  sequenc
 
 This project is a python implementation of the same methods using in my PhD thesis but with a simple 2D lattice and known python libraries.
 
+### Dependencies
+
+* bokeh==1.2.0
+* ann_visualizer==2.5
+* matplotlib==2.0.0
+* gym==0.12.5
+* tornado==6.0.2
+* numpy==1.12.1
+* six==1.11.0
+* Keras==2.2.4
+* pytest==5.0.1
+* scikit_learn==0.21.3
+
+### Installation
+This package is only compatible with Python 3.4 and above. To install this package, please follow the instructions below:
+
+* Install OpenAI Gym and its dependencies.
+* Install the package itself:
+
+```
+git clone https://github.com/danielvarela/2D_protein_AI.git
+cd 2D_protein_AI
+pip install -e .
+```
+
+### Basic Usage
+
+```python
+def main():  
+  seq = 'HPHPHPHPPHPH' # Our input sequence  
+  popsize = 100 # Population size, must be >= 4   	
+  mutate = 0.3 # Mutation factor [0,2]   
+  recombination = 0.9 # crossover factor [0,1]
+  maxiter = 5000 # Max number of generations (maxiter)
+  mode = "PSP
+  cost_func = build_cost_func(mode, seq, strategy)
+  
+  #--- RUN ------------------------------------------------------------------+
+  alg = DifferentialEvolutionAlgorithm(seq, cost_func, popsize, mutate, recombination, maxiter)
+  alg.main()
+
+python DE.py
+```
+
+
 ## Protein Structure Prediction
 
 One of the most important problems in molecular biology is to obtain the native structure of a protein from its primary structure, i.e., the amino acids chain. Ab-initio methods adopt different approaches for the protein structure representation. For example, lattice models impose the constraint that the location of amino acids must be in the lattice sites. In the *ab initio* protein structure prediction problem (PSP) many authors have been working on the use of search methods, specially evolutionary algorithms, employing the simple HP lattice model.
@@ -14,19 +59,6 @@ One of the most important problems in molecular biology is to obtain the native 
 
 Differential Evolution [Price05] is a population-based search method. DE creates new candidate solutions by combining existing ones according to a simple formula of vector crossover and mutation, and then keeping whichever candidate solution has the best score or fitness on the optimization problem at hand. 
 
-
-### Basic Usage
-
-    def main():  
-	   seq = 'HPHPHPHPPHPH' # Our input sequence  
-	   popsize = 100 # Population size, must be >= 4   	
-	   mutate = 0.3 # Mutation factor [0,2]   
-	   recombination = 0.9 # crossover factor [0,1]
-	   maxiter = 5000 # Max number of generations (maxiter)   
-	   alg = DifferentialEvolutionAlgorithm(seq, popsize, mutate, recombination, maxiter)   
-	   alg.main()
-
-    python DE.py
 
 ### Moves
 
