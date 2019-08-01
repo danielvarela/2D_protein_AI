@@ -39,8 +39,7 @@ def main():
   mutate = 0.3 # Mutation factor [0,2]   
   recombination = 0.9 # crossover factor [0,1]
   maxiter = 5000 # Max number of generations (maxiter)
-  mode = "PSP
-  cost_func = build_cost_func(mode, seq, strategy)
+  cost_func = build_cost_func("PSP", seq)
   
   #--- RUN ------------------------------------------------------------------+
   alg = DifferentialEvolutionAlgorithm(seq, cost_func, popsize, mutate, recombination, maxiter)
@@ -76,4 +75,33 @@ This implementation uses the one of the most studied lattice models, the HP mode
 
 ![equation](https://latex.codecogs.com/gif.latex?E&space;=&space;\sum_{i&space;<&space;j&space;&space;1}&space;c_{ij}&space;\cdot&space;e_{ij})
 
+## Artificial Neural Network to obtain the temporal folding process
+
+We used cellular automata (CA) for the modeling of the temporal folding of proteins. Unlike the focus of the vast research already done on the direct prediction of the final folded conformations, we will model the temporal and dynamic folding process. The CA model defines how the amino acids interact through time to obtain a folded conformation. We employed the TIP model to represent the protein conformations in a lattice, we extended the classical CA models using artificial neural networks for their implementation, and we used evolutionary computing to automatically obtain the models by means of Differential Evolution. Moreover, the modeling of the folding provides the final protein conformation.
+
+### Basic Usage
+
+To use use this algorithm, simply change this line at the main function of the DE.py document
+
+```python
+  cost_func = build_cost_func("PSP", seq)
+```
+by
+
+```python
+  strategy = "nn_operator"
+  cost_func = build_cost_func("nn_folding", seq, strategy)
+```
+
+The strategy parameter selects different ways to applied the ANN to the protein moves. I would like to explain further this in the future.
+
+### Individuals
+
+We use Differential Evolution to obtain an optimized feed-forward artificial neural network. Each individual encodes the neural network weights as an 1D array.
+
+### Fitness
+
+To evaluate each individual, the feed-forward artificial neural network is applied iteratively to each connection between amino acids in order to obtain the next move. Once the neural network finnish this process, the completed folded protein is evaluated using the HP fitness function previously explained. By this way, the fitness of the candidate neural network corresponds to the folded protein that it can obtain.
+
+![ann_folding](https://github.com/danielvarela/2D_protein_AI/blob/master/images/figure_ann.png)
 
