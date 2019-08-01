@@ -21,9 +21,9 @@ Differential Evolution [Price05] is a population-based search method. DE creates
 	   seq = 'HPHPHPHPPHPH' # Our input sequence  
 	   popsize = 100 # Population size, must be >= 4   	
 	   mutate = 0.3 # Mutation factor [0,2]   
-	   recombination = 0.9  
+	   recombination = 0.9 # crossover factor [0,1]
 	   maxiter = 5000 # Max number of generations (maxiter)   
-	   alg = DifferentialEvolutionAlgorithm(seq, popsize, mutate, recombination,   maxiter)   
+	   alg = DifferentialEvolutionAlgorithm(seq, popsize, mutate, recombination, maxiter)   
 	   alg.main()
 
     python DE.py
@@ -34,14 +34,10 @@ Each connection between two amino acids can perform four possible moves in a 2D 
 
 ### Individuals
 
-Each individual is encoded as an 1D array of $n * {L, D, U, R}$, where n is the total number of connections between the amino acid sequence. By this way, we encode each sequence move as the minimum of its four possible moves.
+Each individual is encoded as an 1D array of length `n * {L, D, U, R}`, where n is the total number of connections between the amino acid sequence. By this way, we encode each sequence move as the minimum of its four possible moves.
 
 ### Fitness
 
-This implementation uses the one of the most studied lattice models, the HP model [Dill90]. Proteins that have minimum energy are assumed to be in their native state. The energy of a protein conformation is defined as:  
- 
- $E = \sum_{i < j - 1} c_{ij} \cdot e_{ij}$ 
-  
-where $c_{ij}=1$ if amino acids $i$ and $j$ are non-consecutive neighbors on the protein sequence and are neighbors (or in contact) on the lattice, otherwise $0$; The term $e_{ij}$ depends on  the type of amino acids: $e_{ij}=-1$ if $ith$ and $jth$ amino acids are hydrophobic (H), otherwise $0$.
+This implementation uses the one of the most studied lattice models, the HP model [Dill90]. Proteins that have minimum energy are assumed to be in their native state. Two amino acids are in contact if they are non-consecutive neighbors on the protein sequence and are neighbors (or in contact) on the lattice. In case that the two amino acids are hydrohopic (H), we count the contact.
 
 
