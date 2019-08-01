@@ -34,7 +34,7 @@ Each connection between two amino acids can perform four possible moves in a 2D 
 
 ### Individuals
 
-Each individual is encoded as an 1D array of $$n * {L, D, U, R}$$, where n is the total number of connections between the amino acid sequence. By this way, we encode each sequence move as the minimum of its four possible moves.
+Each individual is encoded as an 1D array of `n * {L, D, U, R}`, where n is the total number of connections between the amino acid sequence. By this way, we encode each sequence move as the minimum of its four possible moves.
 
 ### Fitness
 
