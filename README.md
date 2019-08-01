@@ -81,7 +81,7 @@ We used cellular automata (CA) for the modeling of the temporal folding of prote
 
 ### Basic Usage
 
-To use use this algorithm, simply change this line at the main function of the DE.py document
+To use this algorithm, simply change this line at the main function of the DE.py document
 
 ```python
   cost_func = build_cost_func("PSP", seq)
