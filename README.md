@@ -68,8 +68,12 @@ Each connection between two amino acids can perform four possible moves in a 2D 
 
 Each individual is encoded as an 1D array of length `n * {L, D, U, R}`, where n is the total number of connections between the amino acid sequence. By this way, we encode each sequence move as the minimum of its four possible moves.
 
+![img](https://github.com/danielvarela/2D_protein_AI/blob/master/images/individual_encoding.png)
+
 ### Fitness
 
 This implementation uses the one of the most studied lattice models, the HP model [Dill90]. Proteins that have minimum energy are assumed to be in their native state. Two amino acids are in contact if they are non-consecutive neighbors on the protein sequence and are neighbors (or in contact) on the lattice. In case that the two amino acids are hydrohopic (H), we count the contact.
+
+![equation](https://latex.codecogs.com/gif.latex?E&space;=&space;\sum_{i&space;<&space;j&space;&space;1}&space;c_{ij}&space;\cdot&space;e_{ij})
 
 
