@@ -81,7 +81,7 @@ This implementation uses the one of the most studied lattice models, the HP mode
 
 Pagmo (C++) or pygmo (Python) is a scientific library that provides an unified interface to optimization algorithms and to optimization problems and to make their deployment in massively parallel environments easy. More information can be found at its website [pygmo url](https://esa.github.io/pagmo2/index.html)
 
-at */pygmo_psp/main.py*, an implementation using the pygmo library can be found. The main function is easy to follow and clear for run an small example using a pygmo archipelago with differential evolution algorithm.
+at */pygmo_psp/main.py*, an implementation using the pygmo library can be found. Following the main function, an small example can be run using by default a pygmo archipelago with differential evolution algorithm.
 
 ## Artificial Neural Network to obtain the temporal folding process
 
