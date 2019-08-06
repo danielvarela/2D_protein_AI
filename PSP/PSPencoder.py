@@ -16,7 +16,8 @@ class PSPencoder():
         return int(NewValue)
 
     def from_array_to_action(self, X):
-        return X.index(min(X))
+        t_list = list(X)
+        return t_list.index(min(t_list))
     
     def to_actions(self, ind):
         actions = []
