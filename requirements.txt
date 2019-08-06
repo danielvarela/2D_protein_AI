@@ -8,3 +8,4 @@ six==1.11.0
 Keras==2.2.4
 pytest==5.0.1
 scikit_learn==0.21.3
+pygmo==2.10

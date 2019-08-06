@@ -17,6 +17,7 @@ This project is a python implementation of the same methods using in my PhD thes
 * Keras==2.2.4
 * pytest==5.0.1
 * scikit_learn==0.21.3
+* pygmo==2.10
 
 ### Installation
 This package is only compatible with Python 3.4 and above. To install this package, please follow the instructions below:
@@ -74,6 +75,13 @@ Each individual is encoded as an 1D array of length `n * {L, D, U, R}`, where n 
 This implementation uses the one of the most studied lattice models, the HP model [Dill90]. Proteins that have minimum energy are assumed to be in their native state. Two amino acids are in contact if they are non-consecutive neighbors on the protein sequence and are neighbors (or in contact) on the lattice. In case that the two amino acids are hydrohopic (H), we count the contact.
 
 ![equation](https://latex.codecogs.com/gif.latex?E&space;=&space;\sum_{i&space;<&space;j&space;&space;1}&space;c_{ij}&space;\cdot&space;e_{ij})
+
+
+### pygmo implementation
+
+Pagmo (C++) or pygmo (Python) is a scientific library that provides an unified interface to optimization algorithms and to optimization problems and to make their deployment in massively parallel environments easy. More information can be found at its website ![pygmo url](https://esa.github.io/pagmo2/index.html)
+
+at */pygmo_psp/main.py*, an implementation using the pygmo library can ben found. The main function is easy to follow and clear for run an small example using a pygmo archipelago with differential evolution algorithm.
 
 ## Artificial Neural Network to obtain the temporal folding process
 
