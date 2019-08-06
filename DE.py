@@ -13,7 +13,7 @@ def ensure_bounds(vec, bounds):
 
     vec_new = []
     # cycle through each variable in vector 
-    for i in range(len(vec)):
+    for i, in enumerate(vec):
 
         # variable exceedes the minimum boundary
         if vec[i] < bounds[i][0]:
@@ -99,7 +99,7 @@ class DifferentialEvolutionAlgorithm():
                 #--- RECOMBINATION (step #3.B) ----------------+
 
                 v_trial = []
-                for k in range(len(x_t)):
+                for k, in enumerate(x_t):
                     crossover = random.random()
                     if crossover <= self.recombination:
                         v_trial.append(v_donor[k])
@@ -135,9 +135,9 @@ class DifferentialEvolutionAlgorithm():
 #--- MAIN  ----------------------------------------------------------------+
 
 def build_cost_func(mode, seq, strategy):
-    if (mode is "PSP"):
+    if (mode == "PSP"):
         return PSPFunction(seq)
-    if (mode is "nn_folding"):
+    if (mode == "nn_folding"):
         return NeuralNetworkFunction(seq, strategy)
     
 def main():

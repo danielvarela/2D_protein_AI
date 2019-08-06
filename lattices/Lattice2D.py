@@ -148,8 +148,7 @@ class Lattice2D(gym.Env):
 
     def _compute_state(self, actions):
         state = OrderedDict({0 : Residue(0, self.seq[0], (0,0) )})
-        for i in range(0, len(actions)):
-            action = actions[i]
+        for i, action in enumerate(actions):
             (x, y) = state[list(state.keys())[-1]].coords
             # Get all adjacent coords and next move based on action
             adj_coords = self._get_adjacent_coords((x, y))

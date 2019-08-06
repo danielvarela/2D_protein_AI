@@ -41,4 +41,3 @@ class NeuralNetworkPlayer():
                     break
             scores.append(score) 
         return scores, choices
-

@@ -63,8 +63,10 @@ class DatasetNNAgent():
     def __init__(self, input_nn):
         self.nn_agent = NNAgent(input_nn) 
         self.e = EnergySampler() 
+        
     def choose_action(self, env, res_pos):
         if (np.random.randint(0,100) < 10):
-            return np.random.randint(0,4), self.e.get_current_observation(env, res_pos)
+            result = (np.random.randint(0,4), self.e.get_current_observation(env, res_pos))
         else:
-            return self.nn_agent.choose_action(env,res_pos)
+            result = self.nn_agent.choose_action(env,res_pos)
+        return result

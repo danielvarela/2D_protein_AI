@@ -13,11 +13,11 @@ class NeuralNetworkFunction(CostFunction):
         self.name = "NN function"
         self.strategy = strategy
         self.seq = seq
-        if (self.strategy is "grid"):
+        if (self.strategy == "grid"):
             self.model = FFmodel(100)
-        if (self.strategy is "nn_operator"):
+        if (self.strategy == "nn_operator"):
             self.model = FFmodel(8)
-        if (self.strategy is "nn_operator_ext"):
+        if (self.strategy == "nn_operator_ext"):
             self.model = FFmodel(4)
 
         self.operator = NNOperatorBuilder(self.seq).get(self.strategy)
@@ -37,4 +37,3 @@ class NeuralNetworkFunction(CostFunction):
     def render(self, x):
         self.model.set_weights(x)
         self.operator.render(self.model)
- 

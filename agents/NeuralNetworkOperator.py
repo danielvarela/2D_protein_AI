@@ -217,10 +217,10 @@ class NNOperatorBuilder():
         self.seq = seq
 
     def get(self, strategy):
-        if (strategy is "nn_operator") :
+        if (strategy == "nn_operator") :
             return NeuralNetworkOperator(self.seq, "nn_operator")
-        if (strategy is "grid") :
+        if (strategy == "grid") :
             return NeuralNetworkGridOperator(self.seq, "grid")
-        if (strategy is "nn_operator_ext") :
+        if (strategy == "nn_operator_ext") :
             return ExtensiveLatticeNeuralNetworkOperator(self.seq, "nn_operator_ext")
         

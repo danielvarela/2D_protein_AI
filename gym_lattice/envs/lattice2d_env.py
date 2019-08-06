@@ -161,7 +161,7 @@ class Lattice2DEnv(gym.Env):
         #     print("error at length actions " + str(len(actions)))
         #     exit()
 
-        for i in range(0, len(actions)):
+        for i, action in enumerate(actions):
             action = actions[i]
             (x, y) = state[list(state.keys())[-1]].coords
             # Get all adjacent coords and next move based on action
@@ -307,7 +307,7 @@ class Lattice2DEnv(gym.Env):
         return self.grid
 
     def render(self, mode='human'):
-        """Renders the environment"""
+        # Renders the environment 
         outfile = StringIO() if mode == 'ansi' else sys.stdout
         desc = self.grid.astype(str)
 

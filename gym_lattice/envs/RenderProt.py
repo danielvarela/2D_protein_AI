@@ -49,4 +49,3 @@ class RenderProt():
         self.plot_sphere(points[center])
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
-
