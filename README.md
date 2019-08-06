@@ -109,7 +109,7 @@ We use Differential Evolution to obtain an optimized feed-forward artificial neu
 
 ### Fitness
 
-To evaluate each individual, the feed-forward artificial neural network is applied iteratively to each connection between amino acids in order to obtain the next move. Once the neural network finnish this process, the completed folded protein is evaluated using the HP fitness function previously explained. By this way, the fitness of the candidate neural network corresponds to the folded protein that it can obtain.
+To evaluate each individual, the feed-forward artificial neural network is applied iteratively to each connection between amino acids in order to obtain the next move. Once the neural network finish this process, the completed folded protein is evaluated using the HP fitness function previously explained. By this way, the fitness of the candidate neural network corresponds to the folded protein that it can obtain.
 
 ![ann_folding](https://github.com/danielvarela/2D_protein_AI/blob/master/images/figure_ann.png)
 
