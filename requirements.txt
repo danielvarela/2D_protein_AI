@@ -2,7 +2,7 @@ bokeh==1.2.0
 ann_visualizer==2.5
 matplotlib==2.0.0
 gym==0.12.5
-tornado==6.0.2
+tornado==6.3.2
 numpy==1.12.1
 six==1.11.0
 Keras==2.2.4
